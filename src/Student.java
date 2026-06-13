@@ -4,7 +4,7 @@ public class Student {
     private String dept;
     private int gpa;
     //Constructor
-    public Student(int ID, String name, String dept, int gpa) {
+    public Student(int ID, String name, String dept, double gpa) {
         this.ID = ID;
         this.name = name;
         this.dept = dept;
