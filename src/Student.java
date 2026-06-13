@@ -32,7 +32,7 @@ public class Student {
     public void setDept(String newDept ) {
         this.dept = newDept;
     }
-    public int getGpa() {
+    public double getGpa() {
         return gpa;
     }
     public void setGpa(int newGPA) {
