@@ -10,4 +10,30 @@ public class Student {
         this.dept = dept;
         this.gpa = gpa;
     }
+    //Getters and setters
+    public int getID() {
+        return ID;
+    }
+    public void setID(int newID) {
+        this.ID = newID;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String newName) {
+        this.name = newName;
+    }
+    public String getDept() {
+        return dept;
+    }
+    public void setDept(String newDept ) {
+        this.dept = newDept;
+    }
+    public int getGpa() {
+        return gpa;
+    }
+    public void setGpa(int newGPA) {
+        this.gpa = newGPA;
+    }
+
 }
