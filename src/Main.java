@@ -183,4 +183,10 @@ public class Main {
                         e.printStackTrace();
                 }
 
+                default:
+                    System.out.println("Err: Invalid Option. Rerun Program.");
+
+            }
+        }
+    }
 }
