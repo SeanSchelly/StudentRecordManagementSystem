@@ -2,7 +2,7 @@ public class Student {
     private int ID;
     private String name;
     private String dept;
-    private int gpa;
+    private double gpa;
     //Constructor
     public Student(int ID, String name, String dept, double gpa) {
         this.ID = ID;
