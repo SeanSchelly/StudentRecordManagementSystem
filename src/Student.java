@@ -38,5 +38,4 @@ public class Student {
     public void setGpa(double newGPA) {
         this.gpa = newGPA;
     }
-
 }
