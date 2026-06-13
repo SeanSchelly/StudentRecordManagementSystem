@@ -35,7 +35,7 @@ public class Student {
     public double getGpa() {
         return gpa;
     }
-    public void setGpa(int newGPA) {
+    public void setGpa(double newGPA) {
         this.gpa = newGPA;
     }
 
