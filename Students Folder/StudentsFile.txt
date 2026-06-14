@@ -1,4 +1,0 @@
-1 Sean dept 3.78
-2 Phil dept 3.7
-2 Niam dept 3.0
-4 Kaka dept 3.7
