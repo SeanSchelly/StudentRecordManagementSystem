@@ -89,21 +89,22 @@ public class Main {
                         }
                         //
                         System.out.println("-------------------------------");
-                        System.out.println("Closing streams...");
                         //
+                        System.out.println("Closing streams...");
                         fileOut1.close();
                         fileOut2.close();
                         fileOut3.close();
                         fileOut4.close();
-                        //
-                        System.out.println("-------------------------------");
                         System.out.println("Done.");
+                        //
                         System.out.println("-------------------------------");
                         System.out.println("Your students are recorded successfully. What would you like to do now?");
                         System.out.println("1. Add Student");
                         System.out.println("2. Delete Student");
                         System.out.println("3. Search Student By ID");
                         System.out.println("4. Display All Students");
+                        System.out.println("5. Update a student record");
+                        System.out.println("6. Generate report");
                         //
                         int actionChoice = input.nextInt();
                         switch(actionChoice) {
@@ -145,7 +146,7 @@ public class Main {
                                 break;
 
                             case 2:
-                                System.out.println("Which record do you want removed?(Enter ID -> between 1 & 4)(Any new record must be deleted separately.)");
+                                System.out.println("Which record do you want removed?(Enter ID -> between 1 & 4)(Any new record must be deleted manually.)");
                                 int idDel = input.nextInt();
                                 if(idDel == 1) {
                                     System.out.println("Removing ID 1's file...");
@@ -276,14 +277,94 @@ public class Main {
                                 }
                                 System.out.println("-------------------------------");
                                 break;
+
+                            case 5:
+                                System.out.println("Which student's record do you want to overwrite?");
+                                System.out.println("| 0 | 1 | 2 | 3 | "+" N.B -> to pick the first record, enter zero. To pick the second record, enter 1, etc.");
+                                int updateSel = input.nextInt();
+                                //
+                                System.out.println("ID: (Unchanged)");
+                                //
+                                String nameUpdate = input.nextLine(); // consumes escape sequence, from previous int input, that is blocking buffer memory to allow name input
+                                System.out.println("Name: ");
+                                nameUpdate = input.nextLine();
+                                studentsArray[updateSel].setName(nameUpdate);
+                                System.out.println("Recorded.");
+                                //
+                                System.out.println("Department: ");
+                                String deptUpdate = input.nextLine();
+                                studentsArray[updateSel].setDept(deptUpdate);
+                                System.out.println("Recorded.");
+                                //
+                                System.out.println("GPA:");
+                                double gpaUpdate = input.nextDouble();
+                                studentsArray[updateSel].setGpa(gpaUpdate);
+                                //
+                                System.out.println("Initializing old file deletion...");
+                                File delFile1 = new File("Students Folder\\StudentsFile1.txt");
+                                File delFile2 = new File("Students Folder\\StudentsFile2.txt");
+                                File delFile3 = new File("Students Folder\\StudentsFile3.txt");
+                                File delFile4 = new File("Students Folder\\StudentsFile4.txt");
+                                File[] filesForDeletion = {delFile1, delFile2, delFile3, delFile4};
+                                filesForDeletion[updateSel].delete();
+                                //
+                                System.out.println("Done. Writing changes...");
+                                try(PrintWriter fileOutNew = new PrintWriter("Students Folder\\(UPDATED)StudentsFile"+(updateSel+1)+".txt");) {
+                                    fileOutNew.println(studentsArray[updateSel].getID()+" "+studentsArray[updateSel].getName()+" "+studentsArray[updateSel].getDept()+" "+studentsArray[updateSel].getGpa());
+                                    System.out.println("Done. To see the updated record, check the folder for the new file.");
+                                } catch(IOException e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+
+                            case 6:
+                                System.out.println("Set up is complete. We'll generate a report now.");
+                                //
+                                System.out.println("Finding total students...");
+                                int totStudents = studentsArray.length;
+                                //
+                                System.out.println("Finding highest GPA...");
+                                double gpa1 = s1.getGpa();
+                                double gpa2 = s2.getGpa();
+                                double gpa3 = s3.getGpa();
+                                double gpa4 = s4.getGpa();
+                                //GPA array
+                                double[] gpaArray ={gpa1, gpa2, gpa3, gpa4};
+
+                                //Enhanced for loop used for easy looping
+                                double maxVal = gpaArray[0];
+                                double minVal = gpaArray[0];
+                                for(double gpa : gpaArray) {
+                                    if(gpa > maxVal) {
+                                        maxVal = gpa;
+                                    }
+                                    if(gpa < minVal) {
+                                        minVal = gpa;
+                                    }
+                                }
+
+                                System.out.println("Finding Average GPA");
+                                double avgGpa =(gpaArray[0]+gpaArray[1]+gpaArray[2]+gpaArray[3])/gpaArray.length;
+                                //
+                                try(PrintWriter finalReport = new PrintWriter("Students Folder\\REPORT.txt")){
+                                    finalReport.println("FINAL REPORT");
+                                    finalReport.println("Total Students: "+totStudents);
+                                    finalReport.println("Highest GPA: "+maxVal);
+                                    finalReport.println("Lowest GPA: "+minVal);
+                                    finalReport.println("Average GPA: "+avgGpa);
+                                } catch(IOException e) {
+                                    e.printStackTrace();
+                                }
                         }
 
                     } catch(IOException e) {
                         e.printStackTrace();
                     }
                     break;
+
                 default:
                     System.out.println("Err: Invalid Option. Rerun Program.");
+
             }
         }
     }
