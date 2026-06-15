@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Student Record Portal");
@@ -105,6 +106,7 @@ public class Main {
                         System.out.println("4. Display All Students");
                         System.out.println("5. Update a student record");
                         System.out.println("6. Generate report");
+                        System.out.println("7. Display file properties");
                         //
                         int actionChoice = input.nextInt();
                         switch(actionChoice) {
@@ -354,6 +356,57 @@ public class Main {
                                     finalReport.println("Average GPA: "+avgGpa);
                                 } catch(IOException e) {
                                     e.printStackTrace();
+                                }
+                                break;
+                            case 7:
+                                System.out.println("Properties of all recorded Files(files must be created first): ");
+                                File file_display1 = new File("Students Folder\\StudentsFile1.txt");
+                                File file_display2 = new File("Students Folder\\StudentsFile2.txt");
+                                File file_display3 = new File("Students Folder\\StudentsFile3.txt");
+                                File file_display4 = new File("Students Folder\\StudentsFile4.txt");
+
+                                if(file_display1.exists()) {
+                                    System.out.println("Student 1 File:");
+                                    System.out.println("Name: "+file_display1.getName());
+                                    System.out.println("Path: "+file_display1.getPath());
+                                    System.out.println("Size: "+file_display1.length());
+                                    SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+                                    System.out.println("Last Modified Date: "+sd.format(file_display1.lastModified()));
+                                } else{
+                                    System.out.println("Err: File for student 1 does not exist.");
+                                }
+
+                                if(file_display2.exists()) {
+                                    System.out.println("Student 2 File:");
+                                    System.out.println("Name: "+file_display2.getName());
+                                    System.out.println("Path: "+file_display2.getPath());
+                                    System.out.println("Size: "+file_display2.length());
+                                    SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+                                    System.out.println("Last Modified Date: "+sd.format(file_display2.lastModified()));
+                                } else{
+                                    System.out.println("Err: File for student 1 does not exist.");
+                                }
+
+                                if(file_display3.exists()) {
+                                    System.out.println("Student 3 File:");
+                                    System.out.println("Name: "+file_display3.getName());
+                                    System.out.println("Path: "+file_display3.getPath());
+                                    System.out.println("Size: "+file_display3.length());
+                                    SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+                                    System.out.println("Last Modified Date: "+sd.format(file_display3.lastModified()));
+                                } else{
+                                    System.out.println("Err: File for student 2 does not exist.");
+                                }
+
+                                if(file_display3.exists()) {
+                                    System.out.println("Student 1 File:");
+                                    System.out.println("Name: "+file_display4.getName());
+                                    System.out.println("Path: "+file_display4.getPath());
+                                    System.out.println("Size: "+file_display4.length());
+                                    SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+                                    System.out.println("Last Modified Date: "+sd.format(file_display4.lastModified()));
+                                } else{
+                                    System.out.println("Err: File for student 3 does not exist.");
                                 }
                         }
 
