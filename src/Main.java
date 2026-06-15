@@ -399,7 +399,7 @@ public class Main {
                                 }
 
                                 if(file_display3.exists()) {
-                                    System.out.println("Student 1 File:");
+                                    System.out.println("Student 4 File:");
                                     System.out.println("Name: "+file_display4.getName());
                                     System.out.println("Path: "+file_display4.getPath());
                                     System.out.println("Size: "+file_display4.length());
