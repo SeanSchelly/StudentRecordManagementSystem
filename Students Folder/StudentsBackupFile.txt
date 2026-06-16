@@ -1,0 +1,4 @@
+1 Michael Tadeleh Mechanics 3.8
+2 Angel Kebede Software Engineering 3.5
+3 Abebe Tilahun Chemistry 3.0
+4 Phillipos Getachew Biology 3.9

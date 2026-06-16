@@ -111,6 +111,7 @@ public class Main {
                         System.out.println("6. Generate report");
                         System.out.println("7. Display file properties");
                         System.out.println("8. Serialize student records for object transfer");
+                        System.out.println("9. Backup student records");
                         //
                         int actionChoice = input.nextInt();
                         switch(actionChoice) {
@@ -454,10 +455,8 @@ public class Main {
                                             e.printStackTrace();
                                             System.out.println("Err: No objects to deserialize.");
                                         } catch(ClassNotFoundException e) {
+                                            e.printStackTrace();
                                             System.out.println("Err: Could not deserialize objects.");
-                                        }
-                                        for(int i =0; i<studentsArray.length; i++) {
-
                                         }
                                     } else {
                                         System.out.println("No changes made.");
@@ -466,6 +465,95 @@ public class Main {
                                     System.out.println("Err: Can't serialize objects, no object exists.");
                                 }
                                 break;
+                            case 9:
+                                System.out.println("Creating the backup file...");
+                                String line1 = "";
+                                String line2 = "";
+                                String line3 = "";
+                                String line4 = "";
+                                //Student 1
+                                File test11 = new File("Students Folder\\StudentsFile1.txt");
+                                File test12 = new File("Student Folder\\(UPDATED)StudentsFile1.txt");
+                                if(test11.exists()) {
+                                    try(BufferedReader newLine1 = new BufferedReader(new FileReader("Students Folder\\StudentsFile1.txt"))) {
+                                        line1 = newLine1.readLine();
+                                    } catch(IOException e) {
+                                        System.out.println("Err: File might have been deleted. Can't create backup.");
+                                    }
+                                } else if(test12.exists()) {
+                                    try(BufferedReader newLine1 = new BufferedReader(new FileReader("Students Folder\\(UPDATED)StudentsFile1.txt"))) {
+                                        line1 = newLine1.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    System.out.println("Err: Can't Find original or updated file for student 1.");
+                                }
+
+                                //Student 2
+                                File test21 = new File("Students Folder\\StudentsFile2.txt");
+                                File test22 = new File("Students Folder\\(UPDATED)StudentsFile2.txt");
+                                if(test21.exists()) {
+                                    try(BufferedReader newLine2 = new BufferedReader(new FileReader("Students Folder\\StudentsFile2.txt"))) {
+                                        line2 = newLine2.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if(test22.exists()) {
+                                    try(BufferedReader newLine2 = new BufferedReader(new FileReader("Students Folder\\(UPDATED)StudentsFile2.txt"))) {
+                                        line2 = newLine2.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    System.out.println("Err: Can't find original or updated file for Student 2.");
+                                }
+
+                                //Student 3
+                                File test31 = new File("Students Folder\\StudentsFile3.txt");
+                                File test32 = new File("Students Folder\\(UPDATED)StudentsFile3.txt");
+                                if(test31.exists()) {
+                                    try(BufferedReader newLine3 = new BufferedReader(new FileReader("Students Folder\\StudentsFile3.txt"))) {
+                                        line3 = newLine3.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if(test32.exists()) {
+                                    try(BufferedReader newLine3 = new BufferedReader(new FileReader("Students Folder\\(UPDATED)StudentsFile3.txt"))) {
+                                        line3 = newLine3.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    System.out.println("Err: Can't find original or updated file for Student 3.");
+                                }
+
+                                //Student 4
+                                File test41 = new File("Students Folder\\StudentsFile4.txt");
+                                File test42 = new File("Students Folder\\(UPDATED)StudentsFile4.txt");
+                                if(test41.exists()) {
+                                    try(BufferedReader newLine4 = new BufferedReader(new FileReader("Students Folder\\StudentsFile4.txt"))) {
+                                        line4 = newLine4.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if(test42.exists()) {
+                                    try(BufferedReader newLine4 = new BufferedReader(new FileReader("Students Folder\\(UPDATED)StudentsFile4.txt"))) {
+                                        line4 = newLine4.readLine();
+                                    } catch(IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    System.out.println("Err: Can't find original or updated file for Student 4.");
+                                }
+                                try(BufferedWriter backUpFile = new BufferedWriter(new FileWriter("Students Folder\\StudentsBackupFile.txt"))) {
+                                    backUpFile.write(line1+"\n");
+                                    backUpFile.write(line2+"\n");
+                                    backUpFile.write(line3+"\n");
+                                    backUpFile.write(line4+"\n");
+                                } catch(IOException e) {
+                                    e.printStackTrace();
+                                }
                         }
 
                     } catch(IOException e) {
