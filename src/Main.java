@@ -6,17 +6,20 @@ public class Main {
         System.out.println("Student Record Portal");
         System.out.println("-------------------------------");
         System.out.println("Instantiating objects(4)...");
-        //
+
+        //Global student objects
         Student s1 = new Student (0, "name", "dept", 0.0);
         Student s2 = new Student (0, "name", "dept", 0.0);
         Student s3 = new Student (0, "name", "dept", 0.0);
         Student s4 = new Student (0, "name", "dept", 0.0);
         Student s5 = new Student (0, "name", "dept", 0.0);
+
         //Global students array
         Student[] studentsArray = {s1, s2, s3, s4};
         //
         System.out.println("Objects instantiated.");
         System.out.println("Checking for Student folder...");
+        //
         File studentsFolder = new File("Students Folder");
         //global scanner
         Scanner input = new Scanner(System.in);
@@ -107,6 +110,7 @@ public class Main {
                         System.out.println("5. Update a student record");
                         System.out.println("6. Generate report");
                         System.out.println("7. Display file properties");
+                        System.out.println("8. Serialize student records for object transfer");
                         //
                         int actionChoice = input.nextInt();
                         switch(actionChoice) {
@@ -345,7 +349,7 @@ public class Main {
                                     }
                                 }
 
-                                System.out.println("Finding Average GPA");
+                                System.out.println("Finding Average GPA...");
                                 double avgGpa =(gpaArray[0]+gpaArray[1]+gpaArray[2]+gpaArray[3])/gpaArray.length;
                                 //
                                 try(PrintWriter finalReport = new PrintWriter("Students Folder\\REPORT.txt")){
@@ -398,7 +402,7 @@ public class Main {
                                     System.out.println("Err: File for student 2 does not exist.");
                                 }
 
-                                if(file_display3.exists()) {
+                                if(file_display4.exists()) {
                                     System.out.println("Student 4 File:");
                                     System.out.println("Name: "+file_display4.getName());
                                     System.out.println("Path: "+file_display4.getPath());
@@ -406,8 +410,62 @@ public class Main {
                                     SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
                                     System.out.println("Last Modified Date: "+sd.format(file_display4.lastModified()));
                                 } else{
-                                    System.out.println("Err: File for student 3 does not exist.");
+                                    System.out.println("Err: File for student 4 does not exist.");
                                 }
+                                break;
+
+                            case 8:
+                                //Saving objects
+                                System.out.println("'Freezing' student records...");
+                                try(ObjectOutputStream frozenStudents1 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords1.ser"));
+                                    ObjectOutputStream frozenStudents2 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords2.ser"));
+                                    ObjectOutputStream frozenStudents3 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords3.ser"));
+                                    ObjectOutputStream frozenStudents4 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords4.ser"))) {
+                                    ObjectOutputStream[] frozenStudentsArray = {frozenStudents1, frozenStudents2, frozenStudents3, frozenStudents4};
+                                    for(int i=0; i<studentsArray.length; i++){
+                                        frozenStudentsArray[i].writeObject(studentsArray[i]);
+                                    }
+                                    frozenStudents1.close();
+                                    frozenStudents2.close();
+                                    frozenStudents3.close();
+                                    frozenStudents4.close();
+                                    System.out.println("Done.");
+                                    System.out.println("Would you like to keep them serialized or 'unfreeze' them? Input --> (1/any other number) --> i.e. (keep/unfreeze)");
+                                    int toFreeze = input.nextInt();
+                                    if(toFreeze == 1) {
+                                        System.out.println("Unfreezing...");
+                                        try(ObjectInputStream unFrozenStudents1 = new ObjectInputStream(new FileInputStream("Students Folder\\FrozenStudentRecords1.ser"));
+                                            ObjectInputStream unFrozenStudents2 = new ObjectInputStream(new FileInputStream("Students Folder\\FrozenStudentRecords2.ser"));
+                                            ObjectInputStream unFrozenStudents3 = new ObjectInputStream(new FileInputStream("Students Folder\\FrozenStudentRecords3.ser"));
+                                            ObjectInputStream unFrozenStudents4 = new ObjectInputStream(new FileInputStream("Students Folder\\FrozenStudentRecords4.ser"))) {
+                                            ObjectInputStream[] unFrozenStudentsArray = {unFrozenStudents1, unFrozenStudents2, unFrozenStudents3, unFrozenStudents4};
+                                            //New objects to inject deserialized objects into
+                                            Student s1New = (Student)unFrozenStudentsArray[0].readObject();
+                                            Student s2New = (Student)unFrozenStudentsArray[1].readObject();
+                                            Student s3New = (Student)unFrozenStudentsArray[2].readObject();
+                                            Student s4New = (Student)unFrozenStudentsArray[3].readObject();
+                                            //
+                                            System.out.println("Done.");
+                                            System.out.println("Test: ");
+                                            System.out.println("New student 1 name(should be the student of initial student 1 record): ");
+                                            System.out.println(s1New.getName());
+                                            System.out.println("Done.");
+                                        } catch(IOException e) {
+                                            e.printStackTrace();
+                                            System.out.println("Err: No objects to deserialize.");
+                                        } catch(ClassNotFoundException e) {
+                                            System.out.println("Err: Could not deserialize objects.");
+                                        }
+                                        for(int i =0; i<studentsArray.length; i++) {
+
+                                        }
+                                    } else {
+                                        System.out.println("No changes made.");
+                                    }
+                                } catch(IOException e) {
+                                    System.out.println("Err: Can't serialize objects, no object exists.");
+                                }
+                                break;
                         }
 
                     } catch(IOException e) {
