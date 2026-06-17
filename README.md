@@ -19,4 +19,5 @@ Date and time -> Imports java.text.SimpleDataFormat package to format the lastMo
 -> Allows system to create object that uses custome date/time format and format method to apply changes.
 
 decision-making -> Switch cases to switch between supported operations, if statements also included
+
 Automation -> Mostly for loops
