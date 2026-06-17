@@ -388,7 +388,7 @@ public class Main {
                                     System.out.println("Name: "+file_display1.getName());
                                     System.out.println("Path: "+file_display1.getPath());
                                     System.out.println("Size: "+file_display1.length());
-                                    //Creats new simple date format object
+                                    //Creates new simple date format object
                                     SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
                                     //sd object uses format method to reformat date
                                     System.out.println("Last Modified Date: "+sd.format(file_display1.lastModified()));
