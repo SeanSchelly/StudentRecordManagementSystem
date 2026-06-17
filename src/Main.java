@@ -573,6 +573,7 @@ public class Main {
                                 }
                                 break;
 
+                            //Basic binary file copying with DataInputStream and DataOutputStream
                             case 10:
                                 System.out.println("Only Freshman students will get an identifier logo. Are your students Freshman or Senior year? (1/any other number)--> i.e. (Freshman/Senior)");
                                 int batchChoice = input.nextInt();
