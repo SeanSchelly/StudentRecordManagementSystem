@@ -2,7 +2,7 @@
 
 *About*
 
-This program is a simple student record management system that demonstrates 
+This program is a simple student record management system that demonstrates java io streams concepts.
 
 *System Design*
 
