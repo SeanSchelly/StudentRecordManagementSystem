@@ -1,6 +1,10 @@
+//imports
 import java.io.*;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
+//
+//Main program
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Student Record Portal");
@@ -101,6 +105,7 @@ public class Main {
                         fileOut4.close();
                         System.out.println("Done.");
                         //
+                        //Supported Operations
                         System.out.println("-------------------------------");
                         System.out.println("Your students are recorded successfully. What would you like to do now?");
                         System.out.println("1. Add Student");
@@ -112,6 +117,7 @@ public class Main {
                         System.out.println("7. Display file properties");
                         System.out.println("8. Serialize student records for object transfer");
                         System.out.println("9. Backup student records");
+                        System.out.println("10. Generate logo for current batch");
                         //
                         int actionChoice = input.nextInt();
                         switch(actionChoice) {
@@ -152,6 +158,7 @@ public class Main {
                                 }
                                 break;
 
+                            //Uses delete method from File class to remove unwanted records upon user request
                             case 2:
                                 System.out.println("Which record do you want removed?(Enter ID -> between 1 & 4)(Any new record must be deleted manually.)");
                                 int idDel = input.nextInt();
@@ -234,7 +241,7 @@ public class Main {
                                                 System.out.println(fileIn5.nextLine());
                                             }
                                         } catch(IOException e) {
-                                           e.printStackTrace();
+                                            e.printStackTrace();
                                         }
                                         break;
 
@@ -244,6 +251,7 @@ public class Main {
                                 break;
 
                             case 4:
+                                //All Students display using scanner to read student data into the program
                                 System.out.println("All Students: ");
                                 System.out.println("-------------------------------");
                                 try(Scanner fileDisplay1 = new Scanner(new File("Students Folder\\StudentsFile1.txt"))) {
@@ -286,6 +294,7 @@ public class Main {
                                 break;
 
                             case 5:
+                                //Updates student information by using the delete() method from File class and creating a new file in its place
                                 System.out.println("Which student's record do you want to overwrite?");
                                 System.out.println("| 0 | 1 | 2 | 3 | "+" N.B -> to pick the first record, enter zero. To pick the second record, enter 1, etc.");
                                 int updateSel = input.nextInt();
@@ -325,6 +334,7 @@ public class Main {
                                 break;
 
                             case 6:
+                                //Simply uses assigned values from created objects to generate a final report
                                 System.out.println("Set up is complete. We'll generate a report now.");
                                 //
                                 System.out.println("Finding total students...");
@@ -338,7 +348,7 @@ public class Main {
                                 //GPA array
                                 double[] gpaArray ={gpa1, gpa2, gpa3, gpa4};
 
-                                //Enhanced for loop used for easy looping
+                                //Enhanced for loop used for easy looping, to find the minimum and maximum gpa values from array
                                 double maxVal = gpaArray[0];
                                 double minVal = gpaArray[0];
                                 for(double gpa : gpaArray) {
@@ -350,9 +360,11 @@ public class Main {
                                     }
                                 }
 
+                                //Simple average calculation
                                 System.out.println("Finding Average GPA...");
                                 double avgGpa =(gpaArray[0]+gpaArray[1]+gpaArray[2]+gpaArray[3])/gpaArray.length;
                                 //
+                                //PrintWriter used to write the statistics to a new file.
                                 try(PrintWriter finalReport = new PrintWriter("Students Folder\\REPORT.txt")){
                                     finalReport.println("FINAL REPORT");
                                     finalReport.println("Total Students: "+totStudents);
@@ -364,6 +376,7 @@ public class Main {
                                 }
                                 break;
                             case 7:
+                                //Using File Class to display file properties depending on which file exists (updated or old)
                                 System.out.println("Properties of all recorded Files(files must be created first): ");
                                 File file_display1 = new File("Students Folder\\StudentsFile1.txt");
                                 File file_display2 = new File("Students Folder\\StudentsFile2.txt");
@@ -416,7 +429,7 @@ public class Main {
                                 break;
 
                             case 8:
-                                //Saving objects
+                                //Saving objects; turning objects into serialized streams that can be deserialized upon user request.
                                 System.out.println("'Freezing' student records...");
                                 try(ObjectOutputStream frozenStudents1 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords1.ser"));
                                     ObjectOutputStream frozenStudents2 = new ObjectOutputStream(new FileOutputStream("Students Folder\\FrozenStudentRecords2.ser"));
@@ -431,7 +444,7 @@ public class Main {
                                     frozenStudents3.close();
                                     frozenStudents4.close();
                                     System.out.println("Done.");
-                                    System.out.println("Would you like to keep them serialized or 'unfreeze' them? Input --> (1/any other number) --> i.e. (keep/unfreeze)");
+                                    System.out.println("Would you like to keep them serialized or 'unfreeze' them? Input --> (1/any other number) --> i.e. (unfreeze/keep)");
                                     int toFreeze = input.nextInt();
                                     if(toFreeze == 1) {
                                         System.out.println("Unfreezing...");
@@ -451,6 +464,7 @@ public class Main {
                                             System.out.println("New student 1 name(should be the student of initial student 1 record): ");
                                             System.out.println(s1New.getName());
                                             System.out.println("Done.");
+                                            //
                                         } catch(IOException e) {
                                             e.printStackTrace();
                                             System.out.println("Err: No objects to deserialize.");
@@ -466,11 +480,14 @@ public class Main {
                                 }
                                 break;
                             case 9:
+
+                                //Uses BufferedReader and BufferedWriter classes to create streams to create a backup
                                 System.out.println("Creating the backup file...");
                                 String line1 = "";
                                 String line2 = "";
                                 String line3 = "";
                                 String line4 = "";
+
                                 //Student 1
                                 File test11 = new File("Students Folder\\StudentsFile1.txt");
                                 File test12 = new File("Student Folder\\(UPDATED)StudentsFile1.txt");
@@ -576,6 +593,7 @@ public class Main {
                         }
 
                     } catch(IOException e) {
+                        System.out.println("Err: File can't be written to, file extension might have been altered.");
                         e.printStackTrace();
                     }
                     break;
