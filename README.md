@@ -18,6 +18,8 @@ For file operations/properties -> Uses methods, mostly exists() and delete(), fr
 Date and time -> Imports java.text.SimpleDataFormat package to format the lastModified result to date/time format from long integer. 
 -> Allows system to create object that uses custome date/time format and format method to apply changes.
 
+Object serialization -> Uses ObjectOutputStream to 'freeze' objects from Student object array and ObjectInputStream to deserialize objects upon user request.
+
 decision-making -> Switch cases to switch between supported operations, if statements also included
 
 Automation -> Mostly for loops
