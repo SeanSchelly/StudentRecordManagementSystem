@@ -554,6 +554,25 @@ public class Main {
                                 } catch(IOException e) {
                                     e.printStackTrace();
                                 }
+                                break;
+
+                            case 10:
+                                System.out.println("Only Freshman students will get an identifier logo. Are your students Freshman or Senior year? (1/any other number)--> i.e. (Freshman/Senior)");
+                                int batchChoice = input.nextInt();
+                                if(batchChoice == 1) {
+                                    System.out.println("Freshman selected, generating a logo...");
+                                    try(DataInputStream picIn = new DataInputStream(new FileInputStream("fresh.png"));
+                                        DataOutputStream picOut = new DataOutputStream(new FileOutputStream("Students Folder\\freshmanLogo.png"))) {
+                                        int byteData;
+                                        while((byteData = picIn.read()) != -1) {
+                                            picOut.write(byteData);
+                                        }
+                                    } catch(IOException e) {
+                                        System.out.println("Err: No data stream to read from or write to.");
+                                    }
+                                } else {
+                                    System.out.println("Exiting...");
+                                }
                         }
 
                     } catch(IOException e) {
