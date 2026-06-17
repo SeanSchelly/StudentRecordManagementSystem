@@ -5,6 +5,7 @@
 This program is a simple student record management system that demonstrates 
 
 *System Design*
+
 For text files -> The system uses Scanner class to read data into the program from files and uses PrintWriter to write
 text content to new files. It uses for loops to help with the automation of these tasks.
 
