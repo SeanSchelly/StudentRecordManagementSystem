@@ -564,7 +564,7 @@ public class Main {
                                     System.out.println("Err: Can't find original or updated file for Student 4.");
                                 }
                                 try(BufferedWriter backUpFile = new BufferedWriter(new FileWriter("Students Folder\\StudentsBackupFile.txt"))) {
-                                    backUpFile.write(line1+"\n");
+                                    backUpFile.write(line1+"\n");//Escape character used to make other data write to new line
                                     backUpFile.write(line2+"\n");
                                     backUpFile.write(line3+"\n");
                                     backUpFile.write(line4+"\n");
